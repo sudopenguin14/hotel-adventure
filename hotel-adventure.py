@@ -1,11 +1,13 @@
 import random
 import time
-
 # Global state 
 braindmg = False
 chance = False
-
 def start_game():
+  # Global state 
+    global braindmg, chance
+    braindmg = False
+    chance = False
     print("\n-------HOTEL ADVENTURE-------")
     time.sleep(2)
     print("\nInstructions: When choosing between the choices, choose the corresponding number. When prompted with a yes/no question, type only yes or no. Typing anything else wont work ")
@@ -196,31 +198,32 @@ def electrical_puzzle():
     return False
 
 def ground_floor_lobby():
-    print("\n-------------GROUND FLOOR---------------")
-    time.sleep(3)
-    print("This is the Ground Floor. The exit must be close.")
-    time.sleep(3)
-    print("You see 3 ways to proceed forward")
-    time.sleep(2)
-    print("1. Enter the Indoor Playground")
-    time.sleep(2)
-    print("2. Enter the Cafeteria")
-    time.sleep(2)
-    print("3. Enter the Staff Room")
-    time.sleep(2)
-    print("Choose Wisely")
-    time.sleep(1)
-    choice=input("> ").strip()
-    if choice=="1":
-        playground_room()
-    elif choice=="2":
-        cafeteria()
-    elif choice=="3":
-        staff_room()
-    else:
-        print("The exit is so close. Don't give up now!")
-        time.sleep(1)
-        ground_floor_lobby()
+  global chance
+  print("\n-------------GROUND FLOOR---------------")
+  time.sleep(3)
+  print("This is the Ground Floor. The exit must be close.")
+  time.sleep(3)
+  print("You see 3 ways to proceed forward")
+  time.sleep(2)
+  print("1. Enter the Indoor Playground")
+  time.sleep(2)
+  print("2. Enter the Cafeteria")
+  time.sleep(2)
+  print("3. Enter the Staff Room")
+  time.sleep(2)
+  print("Choose Wisely")
+  time.sleep(1)
+  choice=input("> ").strip()
+  if choice=="1":
+      playground_room()
+  elif choice=="2":
+      cafeteria()
+  elif choice=="3":
+      staff_room()
+  else:
+      print("The exit is so close. Don't give up now!")
+      time.sleep(1)
+      ground_floor_lobby()
 
 def playground_room():
     global chance
@@ -272,6 +275,7 @@ def cafeteria():
     ground_floor_lobby()
 
 def staff_room():
+    global chance # MUST add this so the room can see your ticket!
     print("You are now in the staff room.")
     time.sleep(2)
     print("A strange man in a suit is sitting at a desk, staring at the wall")
@@ -280,15 +284,17 @@ def staff_room():
     time.sleep(2)
     print("2. Ignore him and turn away")
     time.sleep(2)
-    choice=input("> ").strip()
-    if choice=="1":
+    choice = input("> ").strip()
+    
+    if choice == "1":
         print("\nThe man smiles.")
         time.sleep(2)
-        print("Man:I've been waiting for you")
+        print("Man: I've been waiting for you")
+        time.sleep(3)
         print("He opens a portal")
         time.sleep(2)
         print("Man: This is way out")
-        print("You trust him, hold you breath and...")
+        print("You trust him, hold your breath and...")
         time.sleep(3)
         print("You jump into the portal")
         time.sleep(3)
@@ -296,19 +302,52 @@ def staff_room():
         time.sleep(3)
         print("\n-------------YOU WON---------------")
     else:
-        print("\nYou turn around and try to run away.")
-        time.sleep(3)
-        print("\nBut then...")
-        time.sleep(3)
-        print("\nYou hear a cry behind you")
-        time.sleep(2)
-        print("The man feels betrayed. He was waiting there for so long to save you, but you betrayed him. He is in tears")
-        time.sleep(5)
-        print("Man: YOU ARE A FILTHY BETRAYER. I SHOULD'VE NEVER WAITED FOR YOU HERE. YOU DESERVE TO DIE")
-        time.sleep(5)
-        print("The man runs up to you and stabs you to death")
-        time.sleep(3)
-        print("\n-------------YOU DIED---------------")
+        # This handles EVERYTHING that isn't choice "1"
+        if chance: 
+            print("\nYou turn around and try to run away.")
+            time.sleep(3)
+            print("\nBut then...")
+            time.sleep(3)
+            print("\nYou hear a cry behind you")
+            time.sleep(2)
+            print("The man feels betrayed. He is in tears.")
+            time.sleep(5)
+            print("Man: YOU ARE A FILTHY BETRAYER! YOU DESERVE TO DIE!")
+            time.sleep(5)
+            print("The man runs up to you and tries to stab you")
+            time.sleep(3)
+            print("\n-------------SECOND CHANCE ACTIVATED---------------")
+            print("\nYour Golden Ticket seems to give you extra power!")
+            time.sleep(3)
+            print("You punch the man hard in the chest, knocking him down")
+            time.sleep(3)
+            print("Something falls from his pockets. It's a key.")
+            time.sleep(3)
+            print("You take the key and it opens a portal.")
+            time.sleep(3)
+            print("\nYou take a deep breath...")
+            time.sleep(3)
+            print("You jump in the portal, teleporting you back to your house")
+            time.sleep(3)
+            print("\n-------------YOU WON...But at what cost?---------------")
+            chance = False  # Ticket spent
+            time.sleep(3)
+        else:
+            # This runs only if choice is "2" AND they have NO ticket
+            print("\nYou turn around and try to run away.")
+            time.sleep(3)
+            print("\nBut then...")
+            time.sleep(3)
+            print("\nYou hear a cry behind you")
+            time.sleep(2)
+            print("The man feels betrayed. He is in tears.")
+            time.sleep(5)
+            print("Man: YOU ARE A FILTHY BETRAYER! YOU DESERVE TO DIE!")
+            time.sleep(5)
+            print("The man runs up to you and stabs you to death")
+            time.sleep(3)
+            print("\n-------------YOU DIED---------------")
+
 
 while True:
     start_game()
