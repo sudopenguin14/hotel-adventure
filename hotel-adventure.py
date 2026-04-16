@@ -97,6 +97,7 @@ def floor2_hallway():
 
 def danger_room():
     print("\nIt is pitch black. You cannot see anything")
+    global braindmg
     if braindmg:
         print("Your head is throbbing. Your legs move without permission!")
         time.sleep(3)
@@ -118,7 +119,7 @@ def danger_room():
         time.sleep(2)
         print("Who knows what was in there?")
         time.sleep(2)
-        floor2_hallway()
+        floor1_hallway()
 
 def storage_room():
     global braindmg
@@ -281,10 +282,12 @@ def staff_room():
     time.sleep(2)
     choice=input("> ").strip()
     if choice=="1":
-        print("\nThe man smiles. He says 'I've been waiting for you'")
-        time.sleep(3)
-        print("He opens a portal and says 'This is way out'")
-        time.sleep(3)
+        print("\nThe man smiles.")
+        time.sleep(2)
+        print("Man:I've been waiting for you")
+        print("He opens a portal")
+        time.sleep(2)
+        print("Man: This is way out")
         print("You trust him, hold you breath and...")
         time.sleep(3)
         print("You jump into the portal")
@@ -301,9 +304,10 @@ def staff_room():
         time.sleep(2)
         print("The man feels betrayed. He was waiting there for so long to save you, but you betrayed him. He is in tears")
         time.sleep(5)
-        print("The man runs up to you and stabs you to death")
-        print("'YOU ARE A FILTHY BETRAYER. I SHOULD'VE NEVER WAITED FOR YOU HERE. YOU DESERVE TO DIE' He says as he stabs you")
+        print("Man: YOU ARE A FILTHY BETRAYER. I SHOULD'VE NEVER WAITED FOR YOU HERE. YOU DESERVE TO DIE")
         time.sleep(5)
+        print("The man runs up to you and stabs you to death")
+        time.sleep(3)
         print("\n-------------YOU DIED---------------")
 
 while True:
@@ -312,16 +316,3 @@ while True:
     if play_again != "yes":
         break
 input("Press ENTER to exit")
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <https://www.gnu.org/licenses/>.
