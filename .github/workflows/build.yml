@@ -1,0 +1,34 @@
+name: Windows Build
+
+on:
+  push:
+    branches: [ main, master ] # Covers both naming possibilities
+  workflow_dispatch: # Allows you to click "Run" manually on the website
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build EXE
+        # This command finds ANY .py file in the folder and builds it
+        run: |
+          $pyFile = Get-ChildItem -Filter *.py | Select-Object -First 1 -ExpandProperty Name
+          pyinstaller --onefile --name "hotel-adventure-win" $pyFile
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hotel-adventure-win
+          path: dist/*.exe
+
